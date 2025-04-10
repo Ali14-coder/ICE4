@@ -2,7 +2,48 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<main>
+    <section class="row" aria-labelledby="Title">
+
+        <center /><h1 id="Title" style="font-size:65px">
+            <asp:Image ID="Logo" runat="server" ImageUrl="~/Images/FinalLogo.png" Width="141px" Height="128px" />
+
+            KhumaloCraft Emporium
+        </h1> <center />
+        <p class="lead">WhiskAway showcases authenitcally home baked items.</p>
+    </section>
+
+    <div class="row" style="background-color:peru">
+        <section class="col-md-4" aria-labelledby="gettingStartedTitle" Align="Left">
+
+            <p>
+                <asp:HyperLink ID="hlinkPottery" runat="server" NavigateUrl="~/MyWorkPage.aspx"> <asp:Image ID="Ipot" runat="server" ImageUrl="~/Images/Main Pottery icon.jpg" Width="150px" Height="150px" /></asp:HyperLink>
+            </p>
+            <h3 style="font:small-caps">CAKES</h3>
+        </section>
+        <section class="col-md-4" aria-labelledby="librariesTitle" Align="Center">
+
+            <p>
+                <asp:HyperLink ID="hlinkLeather" runat="server" NavigateUrl="~/MyWorkPage.aspx">  <asp:Image ID="Leather" runat="server" ImageUrl="~/Images/Main leather icon.jpg" Width="150px" Height="150px" /></asp:HyperLink>
+
+            </p>
+            <h3 style="font:small-caps">MUFFINS</h3>
+        </section>
+        <section class="col-md-4" aria-labelledby="hostingTitle" Align="Right">
+
+            <p>
+                <asp:HyperLink ID="hlinkSculpture" runat="server" NavigateUrl="~/MyWorkPage.aspx">  <asp:Image ID="Sculpture" runat="server" ImageUrl="~/Images/Main sculpture icon.jpg" Width="150px" Height="150px" /></asp:HyperLink>
+            </p>
+            <h3 style="font:small-caps">Sculptures</h3>
+        </section>
+    </div>
+
+    <div align="Middle">
+        <br /><h4> Believing. Building. Bridging.</h4>
+        <p>
+            Here at KhumaloCracft Emporium, we provide a platform for South Africa's authentic artisans to truly express their authenticity through their craftsmanship.<br />
+            We aim to showcase the wondrous works of our local talent and bridge people, arcoss the world, through this art.
+        </p>
+    </div>
+</main>
+
