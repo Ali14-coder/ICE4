@@ -1,0 +1,6 @@
+@WhiskAwayAPI_HostAddress = http://localhost:5091
+
+GET {{WhiskAwayAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
