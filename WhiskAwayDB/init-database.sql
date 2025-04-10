@@ -1,8 +1,15 @@
--- Create the database
-CREATE DATABASE BakeryDB;
+USE master;
 GO
 
-USE BakeryDB;
+-- Create the WhiskAwayDB database only if it does not already exist
+IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'WhiskAwayDB')
+BEGIN
+    CREATE DATABASE WhiskAwayDB;
+END
+GO
+
+-- Switch to the WhiskAwayDB database
+USE WhiskAwayDB;
 GO
 
 -- Create Product table
