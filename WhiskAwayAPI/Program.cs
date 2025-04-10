@@ -30,7 +30,13 @@ namespace WhiskAwayAPI
                 "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
             };
 
-            app.MapGet("/weatherforecast", (HttpContext httpContext) =>
+            app.MapGet("/attendees", async (ApplicationDbConnect context) =>
+                await context.Attendees.ToListAsync());
+
+            app.MapGet("/attendees/{id}", async (ApplicationDbConnect context, int id) =>
+                await context.Attendees.FindAsync(id) is Attendee attendee
+                    ? Results.Ok(attendee)
+                    : Results.NotFound()); app.MapGet("/weatherforecast", (HttpContext httpContext) =>
             {
                 var forecast = Enumerable.Range(1, 5).Select(index =>
                     new WeatherForecast
