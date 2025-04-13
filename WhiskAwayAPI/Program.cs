@@ -1,4 +1,7 @@
 
+using Microsoft.EntityFrameworkCore;
+using WhiskAwayAPI.Model;
+
 namespace WhiskAwayAPI
 {
     public class Program
@@ -25,31 +28,21 @@ namespace WhiskAwayAPI
 
             app.UseAuthorization();
 
-            var summaries = new[]
-            {
-                "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-            };
+            app.MapGet("/products", async (ApplicationDbConnect context) =>
+                await context.Products.ToListAsync());
 
-            app.MapGet("/attendees", async (ApplicationDbConnect context) =>
-                await context.Attendees.ToListAsync());
+            app.MapGet("/products/{id}", async (ApplicationDbConnect context, int id) =>
+                await context.Products.FindAsync(id) is Product product
+                    ? Results.Ok(product)
+                    : Results.NotFound());
 
-            app.MapGet("/attendees/{id}", async (ApplicationDbConnect context, int id) =>
-                await context.Attendees.FindAsync(id) is Attendee attendee
-                    ? Results.Ok(attendee)
-                    : Results.NotFound()); app.MapGet("/weatherforecast", (HttpContext httpContext) =>
+            app.MapGet("/Test", (HttpContext httpContext) =>
             {
-                var forecast = Enumerable.Range(1, 5).Select(index =>
-                    new WeatherForecast
-                    {
-                        Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                        TemperatureC = Random.Shared.Next(-20, 55),
-                        Summary = summaries[Random.Shared.Next(summaries.Length)]
-                    })
-                    .ToArray();
-                return forecast;
+                return "I am a docker King 2025 is my year :) ";
             })
-            .WithName("GetWeatherForecast")
+            .WithName("GetHello")
             .WithOpenApi();
+
 
             app.Run();
         }
