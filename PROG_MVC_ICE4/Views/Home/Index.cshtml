@@ -8,13 +8,13 @@
 </div>
 
 @{
-    var items = new List<(string Title, string ImgUrl)>
+    var items = new List<(string Title, string ImgUrl, string Action)>
     {
-        ("CAKES", "~/images/cakes.jpg"),
-        ("MUFFINS", "~/images/muffins.jpg"),
-        ("PASTRIES", "~/images/pasteries.jpg"),
-        ("TARTS", "~/images/tarts.jpg"),
-        ("BREAD", "~/images/breads.jpg")
+        ("CAKES", "~/images/cakes.jpg", "Cakes"),
+        ("MUFFINS", "~/images/muffins.jpg", "Muffins"),
+        ("PASTRIES", "~/images/pasteries.jpg", "Pastries"),
+        ("TARTS", "~/images/tarts.jpg", "Tarts"),
+        ("BREAD", "~/images/breads.jpg", "Bread")
     };
 }
 
@@ -23,12 +23,14 @@
         @foreach (var item in items)
         {
             <div class="col-md-3 m-3">
-                <div class="card shadow-sm">
-                    <img src="@Url.Content(item.ImgUrl)" class="card-img-top" alt="@item.Title" />
-                    <div class="card-body text-center">
-                        <h5 class="card-title">@item.Title</h5>
+                <a asp-controller="Product" asp-action="@item.Action" class="text-decoration-none text-dark">
+                    <div class="card border-0 shadow-sm h-100">
+                        <img src="@Url.Content(item.ImgUrl)" class="card-img-top" alt="@item.Title" style="height: 200px; object-fit: cover;" />
+                        <div class="card-body text-center">
+                            <h5 class="card-title">@item.Title</h5>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         }
     </div>
