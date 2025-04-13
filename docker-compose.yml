@@ -28,7 +28,7 @@ services:
     environment:
       SQL_CONNECTION_STRING: "Server=whiskaway-db;Database=WhiskAwayDB;Trusted_Connection=false;MultipleActiveResultSets=true;Encrypt=false;user id=sa;password=WhiskAway2!"
     ports:
-      - "8080:8080"
+      - "5000:5000"
     depends_on:
       whiskaway-db:
         condition: service_healthy
