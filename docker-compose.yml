@@ -12,19 +12,19 @@ services:
       MSSQL_PID: "Express"
     ports:
       - "1433:1433"
-      - "5000:1433"  
+      - "8080:1433"  
     volumes:
       - db_data:/var/opt/mssql
       - ./logs:/var/opt/mssql/log  # Optional: To access logs
     restart: always  # Automatically restart on failure
     networks:
-      - whiskaway-network
+      - prog_mvc_ice4-network
 
-  api-service:
+  mvc-service:
     build:
       context: .               # Root context to ensure file accessibility
-      dockerfile: ./WhiskAwayAPI/Dockerfile  # Path to API Dockerfile
-    container_name: api-service
+      dockerfile: ./PROG_MVC_ICE4/Dockerfile  # Path to MVC Dockerfile
+    container_name: mvc-service
     environment:
       SQL_CONNECTION_STRING: "Server=whiskaway-db;Database=WhiskAwayDB;Trusted_Connection=false;MultipleActiveResultSets=true;Encrypt=false;user id=sa;password=WhiskAway2!"
     ports:
@@ -33,10 +33,10 @@ services:
       whiskaway-db:
         condition: service_healthy
     networks:
-      - whiskaway-network
+      - prog_mvc_ice4-network
 
 networks:
-  whiskaway-network:
+  prog_mvc_ice4-network:
     driver: bridge
 
 volumes:
