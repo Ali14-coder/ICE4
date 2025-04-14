@@ -12,7 +12,7 @@ services:
       MSSQL_PID: "Express"
     ports:
       - "1433:1433"
-      - "1400:1433"  
+      - "8080:1433"  
     volumes:
       - db_data:/var/opt/mssql
       - ./logs:/var/opt/mssql/log  # Optional: To access logs
@@ -28,7 +28,7 @@ services:
     environment:
       SQL_CONNECTION_STRING: "Server=whiskaway-db;Database=WhiskAwayDB;Trusted_Connection=false;MultipleActiveResultSets=true;Encrypt=false;user id=sa;password=WhiskAway2!"
     ports:
-      - "5000:5000"
+      - "5000:8080"
     depends_on:
       whiskaway-db:
         condition: service_healthy
