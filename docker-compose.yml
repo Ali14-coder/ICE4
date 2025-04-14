@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  whiskaway-db:
+    build:
+      context: ./WhiskAwayDB  # Adjusted build context
+      dockerfile: Dockerfile   # Dockerfile for the database
+    container_name: whiskaway-db
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "WhiskAway2!"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+      - "8080:1433"  
+    volumes:
+      - db_data:/var/opt/mssql
+      - ./logs:/var/opt/mssql/log  # Optional: To access logs
+    restart: always  # Automatically restart on failure
+    networks:
+      - prog_mvc_ice4-network
+
+  mvc-service:
+    build:
+      context: .               # Root context to ensure file accessibility
+      dockerfile: ./PROG_MVC_ICE4/Dockerfile  # Path to MVC Dockerfile
+    container_name: mvc-service
+    environment:
+      SQL_CONNECTION_STRING: "Server=whiskaway-db;Database=WhiskAwayDB;Trusted_Connection=false;MultipleActiveResultSets=true;Encrypt=false;user id=sa;password=WhiskAway2!"
+    ports:
+      - "5000:5000"
+    depends_on:
+      whiskaway-db:
+        condition: service_healthy
+    networks:
+      - prog_mvc_ice4-network
+
+networks:
+  prog_mvc_ice4-network:
+    driver: bridge
+
+volumes:
+  db_data:
